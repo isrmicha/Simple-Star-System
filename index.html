@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<body>
+
+<div ng-app="myApp" ng-controller="myCtrl">
+
+<select ng-model="voto">
+<option value="1">1 </options>
+<option value="2">2 </options>
+<option value="3">3 </options>
+<option value="4">4 </options>
+<option value="5">5 </options>
+</select><br>
+<input type="submit" value="votar" ng-click="votar(voto)" /><br>
+{{voto}}
+
+
+</select>
+
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope) {
+console.clear();
+	$scope.bar = {};
+    $scope.bar.votos = { id: [], estrelas : []};
+    $scope.meuId="123456789";
+    $scope.votar = function (voto){
+      if(!$scope.bar.hasOwnProperty('votos')){
+      	$scope.bar.votos = { id : [], estrelas : [] };
+      }
+      if($scope.bar.votos.id.includes($scope.meuId)){
+      	var index = $scope.bar.votos.id.indexOf($scope.meuId);
+        $scope.bar.votos.id[index] = $scope.meuId;
+        $scope.bar.votos.estrelas[index] = parseInt(voto);
+      	console.log('Voto alterado.');
+          console.log($scope.bar);
+      }
+      else{
+      	$scope.bar.votos.id.push($scope.meuId);
+        $scope.bar.votos.estrelas.push(parseInt(voto));
+     	 console.log('Voto computado com sucesso!');
+        console.log($scope.bar);
+     	 }
+    }
+});
+</script>
+
+</body>
+</html>
